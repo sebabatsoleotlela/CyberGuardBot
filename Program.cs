@@ -6,33 +6,30 @@ namespace CyberGuardBot
     {
         static void Main(string[] args)
         {
-            // Instantiate our project classes
+            // Instantiate project classes
             Multimedia media = new Multimedia();
             ChatBrain chat = new ChatBrain();
             User currentUser = new User();
 
-            // 1. Multimedia Sequence
+            // 1. Multimedia Intro
             media.VoiceIntro();
             media.DrawLogo();
 
-            // 2. User Setup - Name Prompting Loop
+            // 2. User Setup (Cleaned up as requested)
             Console.ForegroundColor = ConsoleColor.Gray;
             do
             {
-                Console.WriteLine("\n[ SYSTEM INITIALIZED ]");
                 Console.Write("Please enter your name: ");
 
-                // User input in Purple
                 Console.ForegroundColor = ConsoleColor.Magenta;
                 currentUser.Name = Console.ReadLine();
                 Console.ForegroundColor = ConsoleColor.Gray;
 
             } while (string.IsNullOrEmpty(currentUser.Name));
 
-            // 3. User Guidance & Termination Message
+            // 3. Navigation UI & Termination Instruction
             Console.Clear();
 
-            // Header in Blue
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("==================================================");
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
@@ -40,14 +37,10 @@ namespace CyberGuardBot
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("==================================================");
 
-            // Capabilities (Neutral White)
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("I can assist with:");
-            Console.WriteLine("PASSWORDS");
-            Console.WriteLine("PHISHING");
-            Console.WriteLine("CYBER SECURITY");
+            Console.WriteLine("I can assist with: PASSWORDS, PHISHING, and SECURITY.");
 
-            // THE TERMINATION INSTRUCTION (Yellow to stand out)
+            // Clear termination instruction
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("\n[ INSTRUCTION ]");
             Console.WriteLine("To securely terminate this session, please type 'EXIT'.");
@@ -58,14 +51,12 @@ namespace CyberGuardBot
             string input = "";
             do
             {
-                // User Prompt in Blue, User Typing in Purple
                 Console.ForegroundColor = ConsoleColor.Blue;
                 Console.Write("\n" + currentUser.Name + " > ");
                 Console.ForegroundColor = ConsoleColor.Magenta;
                 input = Console.ReadLine();
                 Console.ResetColor();
 
-                // The loop continues until HandleChat returns 'false' (when user types EXIT)
             } while (chat.HandleChat(input));
 
             // 5. Final Shutdown
